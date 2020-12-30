@@ -8,10 +8,10 @@ axios.defaults.headers['X-Session-Id'] = localStorage.getItem('sessionId')
 if (process.env.NODE_ENV == 'development') {
     //开发环境下的代理地址，解决本地跨域跨域，配置在config目录下的index.js dev.proxyTable中
     //项目域名地址
-    axios.defaults.baseURL='http://192.168.2.206:8090';
+    axios.defaults.baseURL='https://ng.mangocloud.com.cn';
   } else if (process.env.NODE_ENV == 'production') {
     //生产环境下的地址
-    axios.defaults.baseURL="http://ng.mangocloud.com.cn"
+    axios.defaults.baseURL="https://ng.mangocloud.com.cn"
   }
   
 //POST传参序列化(添加请求拦截器)

@@ -83,11 +83,9 @@
     export default {
         data: function(){
             var imgCheck = (rule, value, callback) => {
-		      if (value == "") {
-		        callback(new Error("请输入手机号"));
-		      } else if (!this.isCellPhone(value)) {//引入methods中封装的检查手机格式的方法
-		        callback(new Error("请输入正确的手机号!"));
-		      } else {
+		      if (this.coverImgId == "") {
+		        callback(new Error("请上传图片"));
+		      }else{
 		        callback();
 		      }
 		    };
@@ -156,10 +154,10 @@
                         authorName:e.body.authorName,
                         title:e.body.title,
                         contentHtml:that.content,
-                        coverImgId:e.body.coverImgId,
                         display:e.body.display,
                         id:that.id,
                     }
+                    that.coverImgId = e.body.coverImgId,
                     that.content = e.body.contentHtml;
                     that.imageUrl = e.body.coverImgId
 
@@ -172,6 +170,10 @@
                 let that = this;
                 this.$refs[form].validate(valid => {
                     if (valid) {
+                        if(!that.coverImgId){
+                            this.$message.error('请上传封面图片')
+                            return false
+                        }
                         let params = {
                             authorId:that.form.authorId,
                             authorName:that.form.authorName,
